@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>San Simón Water</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f9ff;
+      color: #1a202c;
+    }
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header img {
+      height: 50px;
+    }
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(to bottom right, #caf0f8, #90e0ef);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    .section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    .products {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .product-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #0077b6;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <img src="logo.png" alt="San Simón Logo" />
+    </div>
+    <nav>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#productos">Productos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>San Simón Water</h1>
+    <p>Agua purificada desde el corazón natural de nuestra tierra. Compromiso ambiental y distribución accesible.</p>
+  </section>
+
+  <section class="section" id="nosotros">
+    <h2>¿Quiénes somos?</h2>
+    <p>Somos una empresa familiar dedicada a ofrecer agua de calidad, captada directamente desde los manantiales de San Simón, con procesos de tratamiento certificados y un profundo respeto por el medio ambiente.</p>
+  </section>
+
+  <section class="section" id="productos">
+    <h2>Nuestros Productos</h2>
+    <div class="products">
+      <div class="product-card">
+        <h3>Botella 500ml</h3>
+        <p>Ideal para llevar contigo a donde vayas.</p>
+      </div>
+      <div class="product-card">
+        <h3>Botella 1L</h3>
+        <p>Equilibrio entre tamaño y practicidad.</p>
+      </div>
+      <div class="product-card">
+        <h3>Garrafa 20L</h3>
+        <p>Para tu hogar o negocio, con entrega a domicilio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacto">
+    <h2>Contacto</h2>
+    <p>📞 Teléfono: 555-123-4567<br>
+       ✉️ Email: contacto@sansimonwater.com<br>
+       📍 Ubicación: San Simón, [Tu ciudad]</p>
+  </section>
+
+  <footer>
+    © 2025 San Simón Water. Todos los derechos reservados.
+  </footer>
+
+</body>
+</html>
