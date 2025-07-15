@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Omael Gallegos Palacio - Portafolio GitHub</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: rgba(36, 41, 46, 0.95);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      margin: 0.5rem 0 0 0;
+      font-size: 1.2rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .intro {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+
+    .intro h2 {
+      color: #24292e;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .intro p {
+      font-size: 1.1rem;
+      color: #586069;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0366d6;
+      display: block;
+    }
+
+    .stat-label {
+      color: #586069;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .projects {
+      margin-top: 2rem;
+    }
+
+    .projects h2 {
+      color: white;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .loading {
+      text-align: center;
+      color: white;
+      font-size: 1.1rem;
+      padding: 2rem;
+    }
+
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-left: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid #0366d6;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .project-card h3 {
+      margin: 0 0 1rem 0;
+      color: #24292e;
+      font-size: 1.3rem;
+    }
+
+    .project-card h3 a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .project-card h3 a:hover {
+      color: #0366d6;
+    }
+
+    .project-description {
+      color: #586069;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #586069;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e1e4e8;
+    }
+
+    .language {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .language-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .project-stats {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .project-stat {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer a:hover {
+      opacity: 0.8;
+    }
+
+    .error {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    @media(max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+
+      .intro, .project-card {
+        padding: 1.5rem;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width: 480px) {
+      .container {
+        padding: 0 0.5rem;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .project-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Omael Gallegos Palacio</h1>
+    <p>Desarrollador Full Stack | Tecnólogo en Sistemas | Creador Digital</p>
+  </header>
+
+  <div class="container">
+    <div class="intro">
+      <h2>¡Hola! Soy Omael 👋</h2>
+      <p>Apasionado por la tecnología, el desarrollo de software y la innovación constante. Me especializo en crear soluciones digitales eficientes y escalables. Aquí podrás explorar algunos de mis proyectos más destacados alojados en GitHub.</p>
+    </div>
+
+    <div class="stats" id="stats">
+      <div class="stat-card">
+        <span class="stat-number" id="repoCount">-</span>
+        <div class="stat-label">Repositorios</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="followers">-</span>
+        <div class="stat-label">Seguidores</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="following">-</span>
+        <div class="stat-label">Siguiendo</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="gists">-</span>
+        <div class="stat-label">Gists</div>
+      </div>
+    </div>
+
+    <div class="projects">
+      <h2>Proyectos Destacados</h2>
+      <div class="loading" id="loading">Cargando repositorios...</div>
+      <div class="project-grid" id="repos"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Desarrollado con ❤️ por <strong>Omael Gallegos Palacio</strong> · 
+    <a href="https://github.com/omaelgallegos" target="_blank">GitHub</a> · 
+    <a href="mailto:omael.gallegos@example.com">Contacto</a>
+  </div>
+
+  <script>
+    const GITHUB_USERNAME = "omaelgallegos"; // Tu usuario de GitHub
+
+    // Colores para diferentes lenguajes de programación
+    const languageColors = {
+      JavaScript: '#f1e05a',
+      TypeScript: '#2b7489',
+      Python: '#3572A5',
+      Java: '#b07219',
+      HTML: '#e34c26',
+      CSS: '#563d7c',
+      PHP: '#4F5D95',
+      C: '#555555',
+      'C++': '#f34b7d',
+      'C#': '#239120',
+      Go: '#00ADD8',
+      Rust: '#dea584',
+      Ruby: '#701516',
+      Swift: '#ffac45',
+      Kotlin: '#F18E33',
+      Dart: '#00B4AB',
+      Shell: '#89e051',
+      Vue: '#2c3e50',
+      React: '#61dafb'
+    };
+
+    async function fetchUserStats() {
+      try {
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+        if (!response.ok) throw new Error('Usuario no encontrado');
+        
+        const user = await response.json();
+        
+        document.getElementById('repoCount').textContent = user.public_repos || 0;
+        document.getElementById('followers').textContent = user.followers || 0;
+        document.getElementById('following').textContent = user.following || 0;
+        document.getElementById('gists').textContent = user.public_gists || 0;
+      } catch (error) {
+        console.error('Error al cargar estadísticas:', error);
+        // Mostrar datos de ejemplo si hay error
+        document.getElementById('repoCount').textContent = '15';
+        document.getElementById('followers').textContent = '42';
+        document.getElementById('following').textContent = '28';
+        document.getElementById('gists').textContent = '8';
+      }
+    }
+
+    async function fetchRepos() {
+      const loadingElement = document.getElementById('loading');
+      const reposContainer = document.getElementById('repos');
+      
+      try {
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=50`);
+        
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+        
+        const repos = await response.json();
+        loadingElement.style.display = 'none';
+
+        if (repos.length === 0) {
+          reposContainer.innerHTML = '<div class="error">No se encontraron repositorios públicos.</div>';
+          return;
+        }
+
+        // Filtrar y ordenar repositorios
+        const filteredRepos = repos
+          .filter(repo => !repo.fork && !repo.archived) // Excluir forks y archivados
+          .sort((a, b) => {
+            // Priorizar repos con más estrellas y actualizaciones recientes
+            const scoreA = (a.stargazers_count * 2) + (a.forks_count) + (new Date(a.updated_at).getTime() / 1000000000);
+            const scoreB = (b.stargazers_count * 2) + (b.forks_count) + (new Date(b.updated_at).getTime() / 1000000000);
+            return scoreB - scoreA;
+          })
+          .slice(0, 12); // Mostrar máximo 12 repositorios
+
+        filteredRepos.forEach(repo => {
+          const card = document.createElement('div');
+          card.className = 'project-card';
+          
+          const languageColor = languageColors[repo.language] || '#586069';
+          const updatedDate = new Date(repo.updated_at).toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+
+          card.innerHTML = `
+            <h3><a href="${repo.html_url}" target="_blank" rel="noopener">${repo.name}</a></h3>
+            <div class="project-description">${repo.description || "Proyecto sin descripción disponible"}</div>
+            <div class="project-meta">
+              <div class="language">
+                ${repo.language ? `
+                  <span class="language-dot" style="background-color: ${languageColor}"></span>
+                  <span>${repo.language}</span>
+                ` : '<span>Sin lenguaje especificado</span>'}
+              </div>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <span>⭐</span>
+                  <span>${repo.stargazers_count}</span>
+                </div>
+                <div class="project-stat">
+                  <span>🍴</span>
+                  <span>${repo.forks_count}</span>
+                </div>
+                <div class="project-stat">
+                  <span>📅</span>
+                  <span>${updatedDate}</span>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          reposContainer.appendChild(card);
+        });
+
+      } catch (error) {
+        console.error('Error al cargar repositorios:', error);
+        loadingElement.style.display = 'none';
+        
+        // Mostrar repositorios de ejemplo si hay error con la API
+        const exampleRepos = [
+          {
+            name: "portfolio-web",
+            description: "Mi portafolio personal desarrollado con HTML, CSS y JavaScript vanilla",
+            language: "JavaScript",
+            stars: 12,
+            forks: 3,
+            updated: "2024-01-15"
+          },
+          {
+            name: "task-manager-app",
+            description: "Aplicación de gestión de tareas con React y Node.js",
+            language: "TypeScript",
+            stars: 8,
+            forks: 2,
+            updated: "2024-01-10"
+          },
+          {
+            name: "api-rest-nodejs",
+            description: "API REST completa con autenticación JWT y base de datos MongoDB",
+            language: "JavaScript",
+            stars: 15,
+            forks: 5,
+            updated: "2024-01-08"
+          },
+          {
+            name: "python-data-analysis",
+            description: "Scripts de análisis de datos con Python, Pandas y Matplotlib",
+            language: "Python",
+            stars: 6,
+            forks: 1,
+            updated: "2024-01-05"
+          },
+          {
+            name: "mobile-app-flutter",
+            description: "Aplicación móvil multiplataforma desarrollada con Flutter",
+            language: "Dart",
+            stars: 10,
+            forks: 4,
+            updated: "2024-01-03"
+          },
+          {
+            name: "ecommerce-frontend",
+            description: "Frontend de tienda online con Vue.js y Vuetify",
+            language: "Vue",
+            stars: 9,
+            forks: 2,
+            updated: "2024-01-01"
+          }
+        ];
+
+        exampleRepos.forEach(repo => {
+          const card = document.createElement('div');
+          card.className = 'project-card';
+          
+          const languageColor = languageColors[repo.language] || '#586069';
+          const updatedDate = new Date(repo.updated).toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+
+          card.innerHTML = `
+            <h3><a href="https://github.com/${GITHUB_USERNAME}/${repo.name}" target="_blank" rel="noopener">${repo.name}</a></h3>
+            <div class="project-description">${repo.description}</div>
+            <div class="project-meta">
+              <div class="language">
+                <span class="language-dot" style="background-color: ${languageColor}"></span>
+                <span>${repo.language}</span>
+              </div>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <span>⭐</span>
+                  <span>${repo.stars}</span>
+                </div>
+                <div class="project-stat">
+                  <span>🍴</span>
+                  <span>${repo.forks}</span>
+                </div>
+                <div class="project-stat">
+                  <span>📅</span>
+                  <span>${updatedDate}</span>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          reposContainer.appendChild(card);
+        });
+
+        // Mostrar mensaje de que se están usando datos de ejemplo
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'error';
+        errorMsg.innerHTML = '⚠️ Mostrando datos de ejemplo. Para ver tus repositorios reales, verifica que el usuario de GitHub sea correcto.';
+        reposContainer.insertBefore(errorMsg, reposContainer.firstChild);
+      }
+    }
+
+    // Inicializar la aplicación
+    document.addEventListener('DOMContentLoaded', function() {
+      fetchUserStats();
+      fetchRepos();
+    });
+
+    // Agregar efecto de parallax suave al scroll
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
+  </script>
+
+</body>
+</html>
